@@ -1617,6 +1617,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 })();
 </script>
 <style>
+.home-app-brand{display:grid;place-items:center;width:34px;height:34px;margin:0 auto 6px 0;padding:1px;overflow:hidden;border:1px solid rgba(236,49,255,.58);border-radius:50%;background:radial-gradient(circle at 35% 25%,rgba(232,120,255,.35),rgba(189,0,231,.16) 62%,rgba(44,1,54,.8));box-shadow:0 0 15px rgba(189,0,231,.34),inset 0 0 8px rgba(255,255,255,.08)}
+.home-app-brand img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
 .home-uid-line{position:relative;display:flex;align-items:center;justify-content:flex-start;gap:3px;width:max-content;direction:ltr;min-height:14px;margin:0 0 4px;color:var(--muted-foreground);font-size:9px;font-variant-numeric:tabular-nums;letter-spacing:.045em}
 .home-uid-line strong{color:var(--foreground);font-size:10px;font-weight:500;letter-spacing:.07em}
 .home-uid-copy{position:absolute;left:0;top:-10px;display:grid;width:12px;height:12px;place-items:center;margin:0;padding:0;border:0;background:transparent;color:var(--muted-foreground);cursor:pointer;transition:color .15s ease}
@@ -1633,8 +1635,15 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     var banner=document.querySelector(".assets-banner");
     var heading=banner&&banner.querySelector(".assets-heading");
     var existing=banner&&banner.querySelector(".home-uid-line");
-    if(existing){var value=existing.querySelector("strong");if(value&&value.textContent!==uid)value.textContent=uid;return}
     if(!banner||!heading)return;
+    var appBrand=banner.querySelector(".home-app-brand");
+    if(!appBrand){
+      appBrand=document.createElement("div");
+      appBrand.className="home-app-brand";
+      appBrand.innerHTML='<img src="./veloxcore-app-icon.png" alt="VeloXCore" width="34" height="34" decoding="async">';
+      banner.insertBefore(appBrand,existing||heading);
+    }
+    if(existing){var value=existing.querySelector("strong");if(value&&value.textContent!==uid)value.textContent=uid;return}
     var row=document.createElement("div");
     row.className="home-uid-line";
     row.innerHTML='<span>UID</span><strong dir="ltr">'+uid+'</strong><button class="home-uid-copy" type="button" aria-label="نسخ UID" title="نسخ UID"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg></button>';
@@ -4641,11 +4650,11 @@ body.ks-auth-locked #root{filter:blur(4px) brightness(.38);pointer-events:none;u
         var note=document.createElement('span');note.className='ka-inline-error';note.id=fieldId+'-error';note.setAttribute('role','alert');note.textContent=text;
         field.appendChild(note);field.classList.add('ka-invalid');field.classList.remove('ka-shaking');void field.offsetWidth;field.classList.add('ka-shaking');
         input.setAttribute('aria-invalid','true');input.setAttribute('aria-describedby',note.id);
-        input.scrollIntoView({block:'nearest',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+        note.scrollIntoView({block:'nearest',inline:'nearest',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
         return;
       }
     }
-    var box=overlay.querySelector('#ka-error');if(box){box.textContent=text;box.classList.add('show')}
+    var box=overlay.querySelector('#ka-error');if(box){box.textContent=text;box.classList.add('show');box.scrollIntoView({block:'nearest',inline:'nearest',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
   }
   function clearField(input){
     var field=input.closest('.ka-field,.ka-check');if(!field)return;
@@ -6101,8 +6110,8 @@ apply(profile());document.addEventListener('DOMContentLoaded',function(){apply(p
 (function(){
   'use strict';
   var labels={
-    ar:{title:'تنزيل التطبيق',description:'أضف VeloXCore إلى جهازك للوصول إليه بسهولة.',ios:'على iPhone أو iPad، اضغط «مشاركة» في Safari ثم اختر «إضافة إلى الشاشة الرئيسية».',other:'افتح قائمة المتصفح واختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».',install:'تثبيت التطبيق',close:'إغلاق',row:'تنزيل التطبيق',rowHint:'إضافة VeloXCore إلى هذا الجهاز'},
-    en:{title:'Download app',description:'Add VeloXCore to your device for quick access.',ios:'On iPhone or iPad, tap Share in Safari, then choose Add to Home Screen.',other:'Open your browser menu and choose Install app or Add to Home screen.',install:'Install app',close:'Close',row:'Download app',rowHint:'Add VeloXCore to this device'},
+    ar:{title:'تثبيت التطبيق',description:'تثبيت التطبيق الرسمي VeloXCore',ios:'على iPhone أو iPad، افتح الصفحة في Safari واضغط «مشاركة»، ثم اختر «إضافة إلى الشاشة الرئيسية».',other:'على Android، اضغط «تثبيت» وأكّد الطلب. إذا لم تظهر النافذة، افتح قائمة Chrome واختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».',install:'تثبيت',close:'إغلاق',row:'تثبيت التطبيق',rowHint:'تثبيت التطبيق الرسمي VeloXCore'},
+    en:{title:'Install app',description:'Install the official VeloXCore app',ios:'On iPhone or iPad, open this page in Safari, tap Share, then choose Add to Home Screen.',other:'On Android, tap Install and confirm. If no prompt appears, open the Chrome menu and choose Install app or Add to Home screen.',install:'Install',close:'Close',row:'Install app',rowHint:'Install the official VeloXCore app'},
     tr:{title:'Uygulamayı indir',description:'VeloXCore’u kolay erişim için cihazınıza ekleyin.',ios:'iPhone veya iPad’de Safari’de Paylaş’a dokunup Ana Ekrana Ekle’yi seçin.',other:'Tarayıcı menüsünü açıp Uygulamayı yükle veya Ana ekrana ekle seçeneğini seçin.',install:'Uygulamayı yükle',close:'Kapat',row:'Uygulamayı indir',rowHint:'VeloXCore’u bu cihaza ekle'},
     fr:{title:'Télécharger l’application',description:'Ajoutez VeloXCore à votre appareil pour y accéder rapidement.',ios:'Sur iPhone ou iPad, touchez Partager dans Safari, puis Ajouter à l’écran d’accueil.',other:'Ouvrez le menu du navigateur et choisissez Installer l’application ou Ajouter à l’écran d’accueil.',install:'Installer l’application',close:'Fermer',row:'Télécharger l’application',rowHint:'Ajouter VeloXCore à cet appareil'},
     es:{title:'Descargar la aplicación',description:'Añade VeloXCore a tu dispositivo para acceder rápidamente.',ios:'En iPhone o iPad, pulsa Compartir en Safari y elige Añadir a pantalla de inicio.',other:'Abre el menú del navegador y elige Instalar aplicación o Añadir a pantalla de inicio.',install:'Instalar aplicación',close:'Cerrar',row:'Descargar la aplicación',rowHint:'Añadir VeloXCore a este dispositivo'},
@@ -6118,16 +6127,21 @@ apply(profile());document.addEventListener('DOMContentLoaded',function(){apply(p
   window.addEventListener('appinstalled',function(){installPrompt=null;var modal=document.getElementById('ksp-m');if(modal)updateInstallSheet(modal,true)});
   function activeLabels(){return labels[window.ksInterfaceLanguage]||labels.en}
   var installPresentation={
-    ar:{eyebrow:'VELOXCORE · أسواق ومحفظة رقمية',headline:'تجربة VeloXCore كتطبيق مستقل',body:'أضف VeloXCore إلى جهازك للوصول السريع وواجهة مستقلة بأيقونة خاصة.',benefitOne:'يفتح في مساحة مستقلة على جهازك',benefitTwo:'أيقونة VeloXCore ضمن تطبيقاتك',ready:'جاهز للإضافة إلى جهازك',waiting:'التثبيت غير متاح على هذا الجهاز الآن',installed:'VeloXCore مثبت على جهازك',action:'إضافة التطبيق',done:'تمت الإضافة',later:'ليس الآن',opening:'جارٍ تجهيز التطبيق',cancelled:'لم تتم الإضافة. يمكنك المحاولة لاحقًا.'},
-    en:{eyebrow:'VELOXCORE · DIGITAL ASSETS',headline:'Your VeloXCore app experience',body:'Add VeloXCore to your device for quick access, a dedicated icon, and a standalone app experience.',benefitOne:'Opens in its own app window',benefitTwo:'A dedicated VeloXCore icon',ready:'Ready to add to your device',waiting:'Installation is not available on this device right now',installed:'VeloXCore is installed on this device',action:'Add app',done:'Added',later:'Not now',opening:'Preparing your app',cancelled:'The app was not added. You can try again later.'}
+    ar:{eyebrow:'VELOXCORE',headline:'ثبّت التطبيق الرسمي VeloXCore',body:'',benefitOne:'وصول سريع إلى المنصة من الشاشة الرئيسية',benefitTwo:'أيقونة VeloXCore على جهازك',ready:'اضغط «تثبيت» وأكّد الطلب في نافذة النظام',iosReady:'اتبع خطوات Safari الظاهرة أعلاه لإضافة التطبيق',androidReady:'إذا لم تظهر نافذة التثبيت، اتبع خطوات Android أعلاه',waiting:'التثبيت غير مدعوم الآن',installed:'تم تثبيت التطبيق الرسمي VeloXCore',action:'تثبيت',done:'تم التثبيت',later:'لاحقًا',opening:'جارٍ فتح نافذة التثبيت',cancelled:'لم يكتمل التثبيت. يمكنك المحاولة مرة أخرى.'},
+    en:{eyebrow:'VELOXCORE',headline:'Install the official VeloXCore app',body:'',benefitOne:'Quick access from your home screen',benefitTwo:'A VeloXCore icon on your device',ready:'Tap Install and confirm in the system prompt',iosReady:'Follow the Safari steps above to add the app',androidReady:'If no install prompt appears, follow the Android steps above',waiting:'Installation is not supported right now',installed:'The official VeloXCore app has been installed',action:'Install',done:'Installed',later:'Later',opening:'Opening the installation prompt',cancelled:'Installation was not completed. You can try again.'}
   };
   function installCopy(){return installPresentation[window.ksInterfaceLanguage]||installPresentation.en}
+  function installDevice(){
+    var ua=navigator.userAgent||'',ios=/iPad|iPhone|iPod/i.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+    return {ios:ios,android:/Android/i.test(ua)};
+  }
   function updateInstallSheet(modal,installed){
     if(!modal)return;
-    var text=installCopy(),button=modal.querySelector('[data-install]'),status=modal.querySelector('[data-install-status]');
+    var text=installCopy(),copy=activeLabels(),device=installDevice(),button=modal.querySelector('[data-install]'),status=modal.querySelector('[data-install-status]'),description=modal.querySelector('[data-install-description]');
+    if(description)description.textContent=installed?'':device.ios?copy.ios:device.android?copy.other:text.body;
     if(installed){if(button){button.disabled=true;button.textContent=text.done}if(status)status.textContent=text.installed;return}
-    if(button)button.disabled=!installPrompt;
-    if(status)status.textContent=installPrompt?text.ready:text.waiting;
+    if(button)button.disabled=!installPrompt&&!device.ios&&!device.android;
+    if(status)status.textContent=installPrompt?text.ready:device.ios?text.iosReady:device.android?text.androidReady:text.waiting;
   }
   function inject(){
     var root=document.getElementById('ksp');
@@ -6149,16 +6163,15 @@ apply(profile());document.addEventListener('DOMContentLoaded',function(){apply(p
     try{installed=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(e){}
     if(modal)modal.remove();
     modal=document.createElement('div');modal.id='ksp-m';modal.className='ks-settings-fullscreen vx-app-install';
-    modal.innerHTML='<section class="vx-install-sheet" role="dialog" aria-modal="true" aria-labelledby="vx-install-title"><div class="vx-install-top"><img src="./veloxcore-app-icon.png" alt="VeloXCore"/><button type="button" class="vx-install-close" data-c aria-label="'+copy.close+'">×</button></div><div class="vx-install-eyebrow">'+text.eyebrow+'</div><h2 id="vx-install-title">'+text.headline+'</h2><p class="vx-install-description">'+text.body+'</p><div class="vx-install-benefits"><div><span class="vx-install-check">✓</span><span>'+text.benefitOne+'</span></div><div><span class="vx-install-check">✓</span><span>'+text.benefitTwo+'</span></div></div><button type="button" class="vx-install-action" data-install>'+ (installed?text.done:text.action)+'</button><p class="vx-install-status" data-install-status role="status" aria-live="polite"></p><button type="button" class="vx-install-later" data-c>'+text.later+'</button></section>';
+    modal.innerHTML='<section class="vx-install-sheet" role="dialog" aria-modal="true" aria-labelledby="vx-install-title"><div class="vx-install-top"><img src="./veloxcore-app-icon.png" alt="VeloXCore"/><button type="button" class="vx-install-close" data-c aria-label="'+copy.close+'">×</button></div><div class="vx-install-eyebrow">'+text.eyebrow+'</div><h2 id="vx-install-title">'+text.headline+'</h2><p class="vx-install-description" data-install-description></p><div class="vx-install-benefits"><div><span class="vx-install-check">✓</span><span>'+text.benefitOne+'</span></div><div><span class="vx-install-check">✓</span><span>'+text.benefitTwo+'</span></div></div><button type="button" class="vx-install-action" data-install>'+ (installed?text.done:text.action)+'</button><p class="vx-install-status" data-install-status role="status" aria-live="polite"></p><button type="button" class="vx-install-later" data-c>'+text.later+'</button></section>';
     modal.addEventListener('click',function(event){if(event.target===modal)closeModal(modal)});
     document.body.appendChild(modal);requestAnimationFrame(function(){modal.classList.add('show')});
     modal.querySelectorAll('[data-c]').forEach(function(button){button.onclick=function(){closeModal(modal)}});
     var action=modal.querySelector('[data-install]'),status=modal.querySelector('[data-install-status]');
-    if(installed){action.disabled=true;status.textContent=text.installed}
-    else if(installPrompt){status.textContent=text.ready}
-    else{action.disabled=true;status.textContent=text.waiting}
+    updateInstallSheet(modal,installed);
     action.onclick=function(){
-      var prompt=installPrompt;if(!prompt||action.disabled)return;
+      var prompt=installPrompt,device=installDevice(),copy=activeLabels();if(action.disabled)return;
+      if(!prompt){status.textContent=device.ios?copy.ios:device.android?copy.other:text.waiting;return}
       installPrompt=null;action.disabled=true;action.textContent=text.opening;status.textContent=text.opening;
       try{prompt.prompt();Promise.resolve(prompt.userChoice).then(function(choice){if(choice&&choice.outcome==='accepted'){action.textContent=text.done;status.textContent=text.installed;setTimeout(function(){closeModal(modal)},900)}else{status.textContent=text.cancelled}},function(){status.textContent=text.cancelled})}catch(e){status.textContent=text.cancelled}
     };
@@ -7777,23 +7790,27 @@ setTimeout(function(){if(!primed)armPool(false)},800);
 </style>
 
 <style id="ks-app-install-presentation">
-#ksp-m.vx-app-install{position:fixed!important;inset:0!important;z-index:10050!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:20px!important;background:radial-gradient(ellipse at 50% 10%,rgba(111,55,178,.27),transparent 58%),rgba(5,4,9,.82)!important;backdrop-filter:blur(18px) saturate(125%);-webkit-backdrop-filter:blur(18px) saturate(125%);opacity:0;transition:opacity .2s ease}
+#ksp-m.vx-app-install{position:fixed!important;inset:0!important;z-index:2147483647!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:20px!important;background:radial-gradient(ellipse at 50% 8%,rgba(189,0,231,.3),transparent 58%),rgba(5,4,9,.84)!important;backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%);opacity:0;transition:opacity .2s ease}
 #ksp-m.vx-app-install.show{opacity:1}
-#ksp-m.vx-app-install .vx-install-sheet{box-sizing:border-box;width:min(100%,440px);max-height:calc(100dvh - 40px);overflow:auto;padding:22px 22px calc(20px + env(safe-area-inset-bottom,0px));border:1px solid rgba(255,255,255,.12);border-radius:28px;background:radial-gradient(ellipse at 50% 0,rgba(133,75,205,.2),transparent 54%),linear-gradient(155deg,#1a1722,#0d0c12 72%);box-shadow:0 32px 100px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.06);color:#f7f5fb;text-align:center}
-#ksp-m.vx-app-install .vx-install-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px}
-#ksp-m.vx-app-install .vx-install-top img{width:58px;height:58px;object-fit:contain;border:0;border-radius:0;box-shadow:none}
-#ksp-m.vx-app-install .vx-install-close{display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(255,255,255,.1);border-radius:50%;background:rgba(255,255,255,.05);color:#d9d4e2;font:inherit;font-size:24px;font-weight:400;line-height:1;cursor:pointer}
-#ksp-m.vx-app-install .vx-install-eyebrow{margin:0 0 10px;color:#c5a5ff;font-size:10px;font-weight:800;letter-spacing:.16em}
-#ksp-m.vx-app-install #vx-install-title{margin:0 auto 10px;max-width:340px;color:#fff;font-size:24px;font-weight:800;line-height:1.35}
-#ksp-m.vx-app-install .vx-install-description{margin:0 auto 22px;max-width:350px;color:rgba(235,231,243,.7);font-size:13px;line-height:1.8}
-#ksp-m.vx-app-install .vx-install-benefits{display:grid;gap:10px;margin:0 0 24px;padding:15px;border:1px solid rgba(255,255,255,.08);border-radius:17px;background:rgba(255,255,255,.035);text-align:start}
-#ksp-m.vx-app-install .vx-install-benefits>div{display:flex;align-items:center;gap:10px;color:rgba(245,243,250,.88);font-size:12px;line-height:1.6}
-#ksp-m.vx-app-install .vx-install-check{display:grid;place-items:center;flex:none;width:20px;height:20px;border:1px solid rgba(184,139,255,.28);border-radius:50%;background:rgba(137,86,211,.16);color:#d1b5ff;font-size:12px;font-weight:800}
-#ksp-m.vx-app-install .vx-install-action{width:100%;min-height:50px;border:1px solid rgba(220,188,255,.35);border-radius:15px;background:linear-gradient(120deg,#8b51d6,#602da8);box-shadow:0 10px 28px rgba(112,53,181,.28),inset 0 1px 0 rgba(255,255,255,.2);color:#fff;font:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:filter .18s,transform .18s}
+#ksp-m.vx-app-install .vx-install-sheet{box-sizing:border-box;width:min(100%,440px);max-height:calc(100dvh - 40px);overflow:auto;padding:24px 22px calc(22px + env(safe-area-inset-bottom,0px));border:1px solid rgba(236,49,255,.3);border-radius:28px;background:radial-gradient(ellipse at 50% 0,rgba(189,0,231,.22),transparent 56%),linear-gradient(155deg,#1b1020,#0d0c12 72%);box-shadow:0 32px 100px rgba(0,0,0,.62),0 0 34px rgba(189,0,231,.16),inset 0 1px 0 rgba(255,255,255,.07);color:#f7f5fb;text-align:center}
+#ksp-m.vx-app-install .vx-install-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+#ksp-m.vx-app-install .vx-install-top img{width:60px;height:60px;object-fit:cover;border:1px solid rgba(236,49,255,.65);border-radius:50%;background:#26052e;box-shadow:0 0 20px rgba(236,49,255,.42)}
+#ksp-m.vx-app-install .vx-install-close{display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(236,49,255,.28);border-radius:50%;background:rgba(189,0,231,.1);color:#f0d7f7;font:inherit;font-size:24px;font-weight:400;line-height:1;cursor:pointer;transition:background .18s,border-color .18s}
+#ksp-m.vx-app-install .vx-install-close:hover{border-color:rgba(236,49,255,.68);background:rgba(189,0,231,.22)}
+#ksp-m.vx-app-install .vx-install-eyebrow{margin:0 0 10px;color:#f076ff;font-size:10px;font-weight:800;letter-spacing:.16em}
+#ksp-m.vx-app-install #vx-install-title{margin:0 auto 12px;max-width:340px;color:#fff;font-size:24px;font-weight:800;line-height:1.4;text-shadow:0 0 22px rgba(236,49,255,.24)}
+#ksp-m.vx-app-install .vx-install-description{margin:0 auto 20px;max-width:350px;color:rgba(245,224,250,.82);font-size:13px;line-height:1.9}
+ #ksp-m.vx-app-install .vx-install-description:empty{display:none}
+#ksp-m.vx-app-install .vx-install-benefits{display:grid;gap:9px;margin:0 0 22px;padding:12px;border:1px solid rgba(236,49,255,.2);border-radius:17px;background:linear-gradient(145deg,rgba(189,0,231,.09),rgba(255,255,255,.025));text-align:start}
+#ksp-m.vx-app-install .vx-install-benefits>div{display:flex;align-items:center;gap:11px;min-height:42px;padding:9px 10px;border:1px solid rgba(236,49,255,.13);border-radius:12px;background:rgba(18,10,22,.72);color:rgba(250,242,252,.92);font-size:12px;line-height:1.7}
+#ksp-m.vx-app-install .vx-install-check{display:grid;place-items:center;flex:none;width:22px;height:22px;border:1px solid rgba(236,49,255,.48);border-radius:50%;background:rgba(189,0,231,.2);color:#f29cff;font-size:12px;font-weight:800;box-shadow:0 0 12px rgba(189,0,231,.2)}
+#ksp-m.vx-app-install .vx-install-action{width:100%;min-height:52px;border:1px solid rgba(255,154,255,.5);border-radius:15px;background:linear-gradient(120deg,#e735ef,#bd00e7 55%,#8d08b4);box-shadow:0 10px 30px rgba(189,0,231,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff;font:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:filter .18s,transform .18s,box-shadow .18s}
+#ksp-m.vx-app-install .vx-install-action:hover:not(:disabled){filter:brightness(1.08);box-shadow:0 12px 34px rgba(189,0,231,.45),inset 0 1px 0 rgba(255,255,255,.28)}
 #ksp-m.vx-app-install .vx-install-action:active:not(:disabled){transform:scale(.985)}
 #ksp-m.vx-app-install .vx-install-action:disabled{border-color:rgba(255,255,255,.08);background:rgba(255,255,255,.08);box-shadow:none;color:rgba(255,255,255,.46);cursor:default}
-#ksp-m.vx-app-install .vx-install-status{min-height:19px;margin:12px 0 0;color:#b8a5d3;font-size:11px;line-height:1.6}
-#ksp-m.vx-app-install .vx-install-later{margin-top:9px;padding:8px 16px;border:0;background:none;color:rgba(235,231,243,.62);font:inherit;font-size:12px;cursor:pointer}
+#ksp-m.vx-app-install .vx-install-status{min-height:19px;margin:12px 0 0;color:#edb5f6;font-size:11px;line-height:1.7}
+#ksp-m.vx-app-install .vx-install-later{margin-top:9px;padding:8px 16px;border:0;border-radius:10px;background:transparent;color:rgba(244,224,249,.68);font:inherit;font-size:12px;cursor:pointer;transition:color .18s,background .18s}
+#ksp-m.vx-app-install .vx-install-later:hover{background:rgba(189,0,231,.1);color:#fff}
 @media(max-width:520px){#ksp-m.vx-app-install{align-items:flex-end!important;padding:12px!important}#ksp-m.vx-app-install .vx-install-sheet{width:100%;max-height:calc(100dvh - 24px);padding:21px 19px calc(17px + env(safe-area-inset-bottom,0px));border-radius:26px}}
 @media(prefers-reduced-motion:reduce){#ksp-m.vx-app-install{transition:none}}
 </style>
