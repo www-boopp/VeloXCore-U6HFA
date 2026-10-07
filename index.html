@@ -7978,5 +7978,28 @@ html,body{overscroll-behavior-y:none!important}
 </script>
 
 <script>if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',function(){navigator.serviceWorker.register('./veloxcore-sw.js',{scope:'./'}).catch(function(){})})}</script>
+<style id="veloxcore-auth-brand-icon">
+/* Replace only the microphone/auth placeholder marks; preserve the existing layout and glow. */
+#ks-auth-overlay[data-screen="welcome"] .syncra-orb{
+  overflow:hidden;
+  border-radius:50%;
+  background-image:url("/attached_assets/veloxcore-icon-512_1791384429265.png"),url("/attached_assets/veloxcore-icon-512_1791383987989.png"),url("./attached_assets/veloxcore-icon-512_1791384429265.png"),url("./attached_assets/veloxcore-icon-512_1791383987989.png"),url("./veloxcore-icon-512_1791384429265.png"),url("./veloxcore-icon-512_1791383987989.png"),radial-gradient(circle at 37% 25%,#e878ff 0%,#b30cf7 42%,#6d08a0 73%,#2c0136 100%);
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:94% 94%,94% 94%,94% 94%,94% 94%,94% 94%,94% 94%,100% 100%;
+}
+#ks-auth-overlay[data-screen="welcome"] .syncra-orb svg{display:none!important}
+#ks-auth-overlay[data-screen="welcome"] .syncra-orb:after{display:none!important}
+#ks-auth-overlay[data-screen="login"] .ka-form-panel:before,
+#ks-auth-overlay[data-screen="signup"] .ka-form-panel:before,
+#ks-auth-overlay .ka-reset-screen:before{
+  border:1px solid #bd00e7!important;
+  border-radius:50%!important;
+  background-image:url("/attached_assets/veloxcore-icon-512_1791384429265.png"),url("/attached_assets/veloxcore-icon-512_1791383987989.png"),url("./attached_assets/veloxcore-icon-512_1791384429265.png"),url("./attached_assets/veloxcore-icon-512_1791383987989.png"),url("./veloxcore-icon-512_1791384429265.png"),url("./veloxcore-icon-512_1791383987989.png"),radial-gradient(circle at 35% 25%,#f076ff,#9b18d9 58%,#4f1765)!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-size:78% 78%,78% 78%,78% 78%,78% 78%,78% 78%,78% 78%,100% 100%!important;
+}
+</style>
 </body>
 </html>
