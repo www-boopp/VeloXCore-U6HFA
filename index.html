@@ -8034,7 +8034,7 @@ html,body{overscroll-behavior-y:none!important}
 })();
 </script>
 
-<script>if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',function(){navigator.serviceWorker.register('./veloxcore-sw.js',{scope:'./'}).catch(function(){})})}</script>
+<script>if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',function(){navigator.serviceWorker.register('./veloxcore-sw.js',{scope:'./',updateViaCache:'none'}).then(function(registration){return registration.update()}).catch(function(error){console.error('VeloXCore service worker registration/update failed:',error)})})}</script>
 <style id="veloxcore-auth-brand-icon">
 /* Replace only the microphone/auth placeholder marks; preserve the existing layout and glow. */
 #ks-auth-overlay[data-screen="welcome"] .syncra-orb{

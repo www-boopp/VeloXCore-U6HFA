@@ -1,6 +1,6 @@
 /* Keep the app online-first: never cache wallet screens or account data. */
 self.addEventListener('install', function (event) {
-  self.skipWaiting();
+  event.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener('activate', function (event) {
@@ -8,4 +8,7 @@ self.addEventListener('activate', function (event) {
 });
 
 /* A fetch listener enables Chrome's installability checks without storing data. */
-self.addEventListener('fetch', function (event) {});
+self.addEventListener('fetch', function (event) {
+  if (event.request.method !== 'GET') return;
+  event.respondWith(fetch(event.request));
+});
