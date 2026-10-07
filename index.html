@@ -6161,6 +6161,7 @@ apply(profile());document.addEventListener('DOMContentLoaded',function(){apply(p
     modal._ksDownloadEsc=function(event){if(event.key==='Escape'){closeModal(modal);document.removeEventListener('keydown',modal._ksDownloadEsc)}};
     document.addEventListener('keydown',modal._ksDownloadEsc);
   }
+  window.ksOpenVeloXCoreInstall=openInstall;
   document.addEventListener('click',function(event){var row=event.target.closest&&event.target.closest('#ksp [data-a="app-download"]');if(!row)return;event.preventDefault();event.stopImmediatePropagation();openInstall()},true);
   document.addEventListener('keydown',function(event){var row=event.target.closest&&event.target.closest('#ksp [data-a="app-download"]');if(row&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openInstall()}},true);
   new MutationObserver(function(){requestAnimationFrame(inject)}).observe(document.documentElement,{childList:true,subtree:true});
@@ -6943,7 +6944,7 @@ body>.ks-welcome-actions .ks-welcome-language-option[aria-selected="true"]{color
     }
     trigger.addEventListener('click',function(){var open=menu.hidden;menu.hidden=!open;trigger.setAttribute('aria-expanded',String(open));if(open)refresh()});
     languageButton.addEventListener('click',function(){var open=languageList.hidden;languageList.hidden=!open;languageButton.setAttribute('aria-expanded',String(open))});
-    control.querySelector('.ks-welcome-install').addEventListener('click',close);
+    control.querySelector('.ks-welcome-install').addEventListener('click',function(){close();if(typeof window.ksOpenVeloXCoreInstall==='function')window.ksOpenVeloXCoreInstall()});
     control.addEventListener('keydown',function(event){if(event.key==='Escape'){close();trigger.focus()}});
     document.addEventListener('pointerdown',function(event){if(!control.contains(event.target))close()});
     window.addEventListener('ks-auth-profile-update',refresh);
