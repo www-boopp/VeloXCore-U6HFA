@@ -5,31 +5,20 @@
   "description": "VeloXCore application",
   "lang": "en",
   "dir": "auto",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
   "orientation": "portrait",
   "background_color": "#08070b",
   "theme_color": "#08070b",
+  "prefer_related_applications": false,
+  "categories": ["finance", "productivity"],
   "icons": [
-    {
-      "src": "./veloxcore-icon-180.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./veloxcore-icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./veloxcore-icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
+    { "src": "./veloxcore-icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "./veloxcore-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./veloxcore-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./veloxcore-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "./veloxcore-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
